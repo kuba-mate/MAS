@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Koszyk</title>
+    <link rel="stylesheet" th:href="@{/style_koszyk.css}">
+</head>
+<body>
+<header>
+    <nav>
+        <ul>
+            <li><a th:href="@{/}">SKLEP</a></li>
+            <li><a th:href="@{/oferta}">Oferta sklepu</a></li>
+            <li><a th:href="@{/koszyk}">Koszyk</a></li>
+            <li th:if="${session.user != null}">
+                <a th:href="@{/konto}">Moje konto</a>
+            </li>
+            <li th:if="${session.user == null}">
+                <a th:href="@{/login}">Zaloguj się</a>
+            </li>
+            <li th:if="${session.user != null}">
+                <a th:href="@{/logout}">Wyloguj się</a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<div class="container">
+    <main>
+        <h1>Twój koszyk</h1>
+        <div class="cart-items" th:each="item : ${buts}">
+            <div class="cart-item">
+                <img class="product-image" th:src="@{${item.imageUrl}}" alt="Product Image">
+                <div class="item-details">
+                    <p>Nazwa: <span th:text="${item.nazwa}"></span></p>
+                    <p>Cena: <span th:text="${item.cena}"></span> złoty</p>
+                </div>
+                <div class="item-actions">
+                    <button th:onclick="|window.location.href='@{/koszyk/usun/{id}(id=${item.id})}'|">Usuń z koszyka</button>
+                </div>
+            </div>
+        </div>
+        <div class="checkout" th:if="${buts.size() > 0}">
+            <button th:onclick="|window.location.href='@{/zakup}'|">Przejdź dalej</button>
+        </div>
+    </main>
+</div>
+<footer>
+    <div class="footer-content">
+        <div>Godziny otwarcia: 24/7</div>
+        <div>
+            Kontakt: +48 123 456 789 <br>
+            Koszykowa 86, Warszawa
+        </div>
+    </div>
+</footer>
+</body>
+</html>

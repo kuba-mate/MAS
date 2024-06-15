@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Witaj w Świecie Butów!</title>
+    <link rel="stylesheet" th:href="@{/styles.css}">
+</head>
+<body>
+<header>
+    <nav>
+        <ul>
+            <li><a th:href="@{/}">SKLEP</a></li>
+            <li><a th:href="@{/oferta}">Oferta sklepu</a></li>
+            <li th:if="${session.role == 'user'}"><a th:href="@{/koszyk}">Koszyk</a></li>
+            <li th:if="${session.role == 'user'}"><a th:href="@{/konto}">Moje konto</a></li>
+            <li th:if="${session.role == 'admin'}"><a th:href="@{/admin}">Panel Admina</a></li>
+            <li th:if="${session.user == null}">
+                <a th:href="@{/login}">Zaloguj się</a>
+            </li>
+            <li th:if="${session.user != null}">
+                <a th:href="@{/logout}">Wyloguj się</a>
+            </li>
+        </ul>
+    </nav>
+</header>
+
+<main class="main-content">
+    <section class="section">
+        <h2>O nas</h2>
+        <p>Kładziemy nacisk na profesjonalizm i wyjątkową obsługę, ponieważ tylko w takich warunkach nasi Klienci mogą znaleźć idealne buty dla siebie! Działamy już od ponad 15 lat, stale poszerzając naszą ofertę i starając się spełniać oczekiwania każdego Klienta. Nieustannie się rozwijamy, śledzimy najnowsze trendy w modzie obuwniczej i to jest najważniejsze dla osiągnięcia sukcesu.</p>
+    </section>
+    <section class="section">
+        <h2>Lokalizacja</h2>
+        <img th:src="@{/map.jpg}" alt="Mapa" style="width:100%;">
+    </section>
+    <section class="section">
+        <h2>Opinie klientów</h2>
+        <p>Wszystko super - Kasia</p>
+        <p>Najwyższy profesjonalizm gorąco polecam - Basia</p>
+        <p>Maję same najmodniejsze buty - Asia</p>
+        <p>Niesamowita materiał - Kuba</p>
+    </section>
+    <section class="section">
+        <h2>Pójdź krok dalej</h2>
+        <p>Odwiedź nasz sklep, aby zobaczyć najnowsze kolekcje butów. Kliknij poniżej, aby zobaczyć naszą ofertę.</p>
+        <button th:onclick="|window.location.href='@{/oferta}'|">Zobacz nasze buty</button>
+    </section>
+</main>
+
+<footer>
+    <div class="footer-content">
+        <div>Godziny otwarcia: 24/7</div>
+        <div>
+            Kontakt: +48 123 456 789 <br>
+            Koszykowa 86, Warszawa
+        </div>
+    </div>
+</footer>
+</body>
+</html>

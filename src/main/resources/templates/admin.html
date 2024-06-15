@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Panel Admina</title>
+  <link rel="stylesheet" type="text/css" href="/admin.css">
+</head>
+<body>
+<header>
+  <nav>
+    <ul>
+      <li><a th:href="@{/}">SKLEP</a></li>
+      <li><a th:href="@{/oferta}">Oferta sklepu</a></li>
+      <li><a th:href="@{/admin}">Panel admina</a></li>
+      <li th:if="${session.user != null}">
+        <a th:href="@{/logout}">Wyloguj się</a>
+      </li>
+    </ul>
+  </nav>
+</header>
+<div class="main-content">
+  <h1>PANEL ADMINA</h1>
+  <div class="form-container">
+    <div class="form-section">
+      <h2>Dodaj produkt</h2>
+      <form th:action="@{/admin/dodaj}" th:object="${but}" method="post">
+        <label>Marka:</label>
+        <input type="text" th:field="*{marka}" /><br/>
+        <label>Nazwa modelu:</label>
+        <input type="text" th:field="*{nazwa}" /><br/>
+        <label>Kolor:</label>
+        <input type="text" th:field="*{kolor}" /><br/>
+        <label>Cena:</label>
+        <input type="number" th:field="*{cena}" /><br/>
+        <label>Materiał:</label>
+        <input type="text" th:field="*{material}" /><br/>
+        <label>Rozmiar:</label>
+        <input type="number" th:field="*{rozmiar}" /><br/>
+        <label>Image URL:</label>
+        <input type="text" th:field="*{imageUrl}" /><br/>
+        <button type="submit">Dodaj produkt</button>
+      </form>
+    </div>
+    <div class="form-section">
+      <h2>Usuń produkt</h2>
+      <form th:action="@{/admin/usun}" method="post">
+        <label>ID produktu:</label>
+        <input type="number" name="id" /><br/>
+        <button type="submit">Usuń produkt</button>
+      </form>
+    </div>
+  </div>
+</div>
+<footer>
+  <div class="footer-content">
+    <div>Godziny otwarcia: 24/7</div>
+    <div>
+      Kontakt: +48 123 456 789 <br>
+      Koszykowa 86, Warszawa
+    </div>
+  </div>
+</footer>
+</body>
+</html>

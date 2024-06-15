@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Dokoncz zamówienie</title>
+    <link rel="stylesheet" th:href="@{/checkout.css}">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a th:href="@{/}">SKLEP</a></li>
+                <li><a th:href="@{/oferta}">Oferta sklepu</a></li>
+                <li><a th:href="@{/koszyk}">Koszyk</a></li>
+                <li th:if="${session.user != null}">
+                    <a th:href="@{/konto}">Moje konto</a>
+                </li>
+                <li th:if="${session.user == null}">
+                    <a th:href="@{/login}">Zaloguj się</a>
+                </li>
+                <li th:if="${session.user != null}">
+                    <a th:href="@{/logout}">Wyloguj się</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <div class="container">
+    <main>
+        <h1>Dokończ zamówienie</h1>
+
+        <form action="/submitOrder" method="post">
+            <div class="order-summary">
+                <div th:each="but : ${buts}">
+                    <p th:text="'Nazwa : ' + ${but.nazwa} + ', Cena : ' + ${but.cena} + ' złoty'"></p>
+                    <input type="hidden" name="butIds" th:value="${but.id}">
+                </div>
+                <p th:text="'Całkowita cena zamówienia : ' + ${totalPrice} + ' złoty'"></p>
+                <p th:text="'Data dostawy : ' + ${deliveryDate}"></p>
+                <input type="hidden" name="totalPrice" th:value="${totalPrice}">
+            </div>
+
+            <div class="delivery-options">
+                <label for="deliveryType">Typ dostawy :</label>
+                <select id="deliveryType" name="deliveryType">
+                    <option value="paczkomat">Paczkomat</option>
+                    <option value="kurier">Kurier</option>
+                </select>
+            </div>
+
+            <div class="payment-options">
+                <label>Czy chcesz opłacić teraz :</label>
+                <label><input type="radio" name="payNow" value="true"> Tak</label>
+                <label><input type="radio" name="payNow" value="false"> Nie</label>
+            </div>
+
+            <div class="shipping-info">
+                <label>Nazwa dostawcy :</label>
+                <select id="supplierName" name="supplierName">
+                    <option value="DPD">DPD</option>
+                    <option value="InPost">InPost</option>
+                </select>
+                <label>Ulica :<input type="text" name="street"></label>
+                <label>Numer domu/bloku :<input type="text" name="houseNumber"></label>
+                <label>Miasto :<input type="text" name="city"></label>
+                <label>Kod pocztowy :<input type="text" name="postalCode"></label>
+            </div>
+
+            <button type="submit">Złóż zamówienie</button>
+        </form>
+    </main>
+</div>
+<footer>
+    <div class="footer-content">
+        <div>Godziny otwarcia: 24/7</div>
+        <div>
+            Kontakt: +48 123 456 789 <br>
+            Koszykowa 86, Warszawa
+        </div>
+    </div>
+</footer>
+</body>
+</html>

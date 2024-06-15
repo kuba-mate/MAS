@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Szczegóły produktu</title>
+    <link rel="stylesheet" th:href="@{/style_but.css}">
+</head>
+<body>
+<header>
+    <nav>
+        <ul>
+            <li><a th:href="@{/}">SKLEP</a></li>
+            <li><a th:href="@{/oferta}">Oferta sklepu</a></li>
+            <li th:if="${session.role == 'user'}"><a th:href="@{/koszyk}">Koszyk</a></li>
+            <li th:if="${session.role == 'user'}"><a th:href="@{/konto}">Moje konto</a></li>
+            <li th:if="${session.role == 'admin'}"><a th:href="@{/admin}">Panel Admina</a></li>
+            <li th:if="${session.user == null}">
+                <a th:href="@{/login}">Zaloguj się</a>
+            </li>
+            <li th:if="${session.user != null}">
+                <a th:href="@{/logout}">Wyloguj się</a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<div class="container">
+    <main>
+        <h1 th:text="${but.nazwa}">Model Buta</h1>
+        <div class="product-details">
+            <img th:src="@{/but_{id}.png(id=${but.id})}" alt="Product Image">
+            <div class="details">
+                <pre th:text="${but}"></pre>
+                <button th:if="${session.role == 'user'}" th:onclick="|window.location.href='@{/koszyk/dodaj/{id}(id=${but.id})}'|">Dodaj do koszyka</button>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <div class="footer-content">
+            <div>Godziny otwarcia: 24/7</div>
+            <div>
+                Kontakt: +48 123 456 789 <br>
+                Koszykowa 86, Warszawa
+            </div>
+        </div>
+    </footer>
+</div>
+
+<script>
+    function dodajDoKoszyka(productId) {
+        window.location.href = '/koszyk/dodaj/' + productId;
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,71 @@
+-- Usunięcie istniejących rekordów
+DELETE FROM codzienne;
+DELETE FROM eleganckie;
+DELETE FROM sportowe;
+DELETE FROM zamowienie;
+DELETE FROM dostawa;
+DELETE FROM dostawca;
+DELETE FROM logowanie;
+DELETE FROM klient;
+DELETE FROM osoba;
+DELETE FROM but;
+
+-- Rekordy dla tabeli But
+INSERT INTO but (id, cena, rozmiar, zamowienie_id, kolor, marka, material, nazwa, image_url) VALUES
+                                                                                                 (100, 500, 44, NULL, 'Biały', 'Nike', 'Skóra', 'Air Force 1', 'but_100.png'),
+                                                                                                 (200, 400, 42, NULL, 'Czarny', 'Adidas', 'Skóra', 'Superstar', 'but_200.png'),
+                                                                                                 (300, 300, 41, NULL, 'Czerwony', 'Puma', 'Tkanina', 'SpeedCat', 'but_300.png'),
+                                                                                                 (400, 450, 43, NULL, 'Brązowy', 'Clarks', 'Skóra', 'Oxford', 'but_400.png'),
+                                                                                                 (500, 350, 40, NULL, 'Niebieski', 'Reebok', 'Syntetyk', 'Classic', 'but_500.png');
+
+-- Rekordy dla tabeli Codzienne
+INSERT INTO codzienne (id, sezon) VALUES
+                                      (100, 'letni'),
+                                      (500, 'całoroczny');
+
+-- Rekordy dla tabeli Eleganckie
+INSERT INTO eleganckie (id, wysokosc_obcasa) VALUES
+    (400, 3);
+
+-- Rekordy dla tabeli Sportowe
+INSERT INTO sportowe (id, rodzaj_podeszwy) VALUES
+                                               (300, 'gumowa'),
+                                               (200, 'syntetyczna');
+
+INSERT INTO codzienne_sportowe (id, sezon) VALUES (300, 'letni');
+
+
+-- Insert do tabeli `osoba`
+INSERT INTO osoba (id, imie, nazwisko, email, numer_telefonu) VALUES
+    (100, 'Jan', 'Kowalski', 'jan.kowalski@example.com', '123456789');
+
+-- Insert do tabeli `klient`
+INSERT INTO klient (id, data_rejestracji) VALUES
+    (100, '2024-06-14');
+
+-- Insert do tabeli `logowanie`
+INSERT INTO logowanie (id, id_osoba, login, haslo) VALUES
+    (100, 100, 'a', 'a');
+
+-- Insert do tabeli `dostawca`
+INSERT INTO dostawca (id, do_kiedy, oplata_za_uslugi, nazwa_dostawcy) VALUES
+                                                                          (100, '2024-12-31', 100, 'DPD'),
+                                                                          (200, '2025-06-30', 150, 'FedEx'),
+                                                                          (300, '2024-09-30', 120, 'InPost');
+
+-- Insert do tabeli `dostawa`
+INSERT INTO dostawa (id, data_dostawy, typ_dostawy, dostawca_id, adres) VALUES
+                                                                            (100, '2024-06-14', 0, 100, 'Ul. Krótka 4, 00-123 Warszawa'),
+                                                                            (200, '2024-06-15', 1, 200, 'Ul. Długa 22, 00-456 Kraków'),
+                                                                            (300, '2024-06-16', 0, 300, 'Ul. Szeroka 12, 00-789 Gdańsk');
+
+-- Insert do tabeli `zamowienie`
+INSERT INTO zamowienie (id, cena, czy_oplacone, data_zamowienia, max_data_zamowienia, status, dostawa_id, klient_id) VALUES
+                                                                                                                         (100, 200, true, '2024-06-12', '2024-06-20', 1, 100, 100),
+                                                                                                                         (200, 350, false, '2024-06-13', '2024-06-21', 0, 200, 100),
+                                                                                                                         (300, 150, true, '2024-06-14', '2024-06-22', 3, 300, 100);
+
+
+
+
+
